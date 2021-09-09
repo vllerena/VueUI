@@ -1,0 +1,62 @@
+<template>
+    <div>
+        <div v-if="$store.state.user">
+            <div class="_1side_menu" >
+                <div class="_1side_menu_logo">
+                    <h3 style="text-align:center;">Logo Image</h3>
+                    <!--<img src="/img/logo.jpg" style="width: 108px;margin-left: 68px;"/>-->
+                </div>
+                <div class="_1side_menu_content">
+                    <div class="_1side_menu_img_name">
+                        <!-- <img class="_1side_menu_img" src="/pic.png" alt="" title=""> -->
+                        <p class="_1side_menu_name">Admin</p>
+                    </div>
+                    <div class="_1side_menu_list">
+                        <ul class="_1side_menu_list_ul">
+                            <li><router-link to="/"><Icon type="ios-speedometer" /> Home</router-link></li>
+                            <li><router-link to="/tags"><Icon type="md-barcode" /> Tags</router-link></li>
+<!--                            <li><router-link to="/categories"><Icon type="md-barcode" /> Category</router-link></li>-->
+                            <li><router-link to="adminusers"><Icon type="md-barcode" /> Admin Users</router-link></li>
+                            <li><router-link to="role"><Icon type="md-barcode" /> Roles</router-link></li>
+                            <li><router-link to="permission"><Icon type="md-barcode" /> Permission</router-link></li>
+                            <li><router-link to="logout"><Icon type="md-barcode" /> Logout</router-link></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="header">
+                <div class="_2menu _box_shadow">
+                    <div class="_2menu_logo">
+                        <ul class="open_button">
+                            <li>
+                                <Icon type="ios-list" />
+                            </li>
+                            <!--<li><Icon type="ios-albums" /></li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <router-view/>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "mainapp",
+    props: ['user'],
+    data(){
+        return {
+
+        }
+    },
+    created(){
+        this.$store.commit('updateUser', this.user)
+        console.log(this.user)
+    }
+}
+</script>
+
+<style scoped>
+
+</style>
