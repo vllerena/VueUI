@@ -3106,7 +3106,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 res = _context2.sent;
 
                 if (res.status === 200) {
-                  _this2.s('Role has been assigned successfully!');
+                  _this2.success('Role has been assigned successfully!');
 
                   index = _this2.roles.findIndex(function (role) {
                     return role.id === _this2.data.id;

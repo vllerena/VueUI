@@ -83,7 +83,7 @@ export default {
             let data = JSON.stringify(this.resources)
             const res = await this.callApi('post','api/app/assign_roles', {'permission' : data, id: this.data.id})
             if(res.status===200){
-                this.s('Role has been assigned successfully!')
+                this.success('Role has been assigned successfully!')
                 let index = this.roles.findIndex(role => role.id === this.data.id)
                 this.roles[index].permission = data
             }else{
