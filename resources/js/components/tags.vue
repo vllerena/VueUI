@@ -1,53 +1,53 @@
 <template>
     <div>
-        <div class="content">
-            <div class="container-fluid">
-                <div class="_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20">
-                    <p class="_title0">Tags <Button @click="addModal=true" v-if="this.isWritePermitted"><Icon type="md-add" /> Add Tag</Button></p>
-                    <div class="_overflow _table_div">
-                        <table class="_table">
-                            <tr>
-                                <th>ID</th>
-                                <th>Tag name</th>
-                                <th>Created at</th>
-                                <th>Action</th>
-                            </tr>
-                            <tr v-for="(tag, i) in tags" :key="i" v-if="tags.length">
-                                <td>{{tag.id}}</td>
-                                <td class="_table_name">{{tag.tagName}}</td>
-                                <td>{{tag.created_at}}</td>
-                                <td>
-                                    <Button type="info" size="small" @click="showEditModal(tag, i)" v-if="isUpdatePermitted">Edit</Button>
-                                    <Button type="error" size="small" @click="showDeleteModal(tag, i)" :loading="tag.isDeleting" v-if="isDeletePermitted">Delete</Button>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <Modal
-                        v-model="addModal"
-                        title="Add Tag"
-                        :mask-closable="false"
-                        :closable="false">
-                        <Input v-model="data.tagName" placeholder="Add tag name" />
-                        <div slot="footer">
-                            <Button type="default" @click="addModal=false">Close</Button>
-                            <Button type="primary" @click="addTag" :disabled="isAdding" :loading="isAdding">{{isAdding ? 'Adding..' : 'Add Tag'}}</Button>
-                        </div>
-                    </Modal>
-                    <Modal
-                        v-model="editModal"
-                        title="Edit Tag"
-                        :mask-closable="false"
-                        :closable="false">
-                        <Input v-model="editData.tagName" placeholder="Add tag name" />
-                        <div slot="footer">
-                            <Button type="default" @click="editModal=false">Close</Button>
-                            <Button type="primary" @click="editTag" :disabled="isEditing" :loading="isEditing">{{isEditing ? 'Editing..' : 'Edit Tag'}}</Button>
-                        </div>
-                    </Modal>
-                    <deleteModal></deleteModal>
-                </div>
+        <div class="card flex-fill">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Tags <Button @click="addModal=true" v-if="this.isWritePermitted"><Icon type="md-add" /> Add Tag</Button></h5>
             </div>
+            <table class="table table-hover my-0">
+                <thead>
+                <tr>
+                    <th class="d-none d-xl-table-cell">ID</th>
+                    <th>Tag name</th>
+                    <th class="d-none d-xl-table-cell">Created at</th>
+                    <th class="d-xl-table-cell">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(tag, i) in tags" :key="i" v-if="tags.length">
+                    <td class="d-none d-xl-table-cell">{{tag.id}}</td>
+                    <td>{{tag.tagName}}</td>
+                    <td class="d-none d-xl-table-cell">{{tag.created_at}}</td>
+                    <td class="d-xl-table-cell">
+                        <Button type="info" size="small" @click="showEditModal(tag, i)" v-if="isUpdatePermitted">Edit</Button>
+                        <Button type="error" size="small" @click="showDeleteModal(tag, i)" :loading="tag.isDeleting" v-if="isDeletePermitted">Delete</Button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <Modal
+                v-model="addModal"
+                title="Add Tag"
+                :mask-closable="false"
+                :closable="false">
+                <Input v-model="data.tagName" placeholder="Add tag name" />
+                <div slot="footer">
+                    <Button type="default" @click="addModal=false">Close</Button>
+                    <Button type="primary" @click="addTag" :disabled="isAdding" :loading="isAdding">{{isAdding ? 'Adding..' : 'Add Tag'}}</Button>
+                </div>
+            </Modal>
+            <Modal
+                v-model="editModal"
+                title="Edit Tag"
+                :mask-closable="false"
+                :closable="false">
+                <Input v-model="editData.tagName" placeholder="Add tag name" />
+                <div slot="footer">
+                    <Button type="default" @click="editModal=false">Close</Button>
+                    <Button type="primary" @click="editTag" :disabled="isEditing" :loading="isEditing">{{isEditing ? 'Editing..' : 'Edit Tag'}}</Button>
+                </div>
+            </Modal>
+            <deleteModal></deleteModal>
         </div>
     </div>
 </template>
