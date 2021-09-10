@@ -23,13 +23,33 @@ class AdminController extends Controller
             return view('welcome');
         }
         $user = Auth::user();
-        if ($user->userType == 'user') {
+        if ($user->role->isAdmin == false) {
             return redirect('/login');
         }
         if ($request->path() == 'login') {
             return redirect('/');
         }
-        return view('welcome');
+        return $this->checkForPermission($user, $request);
+    }
+
+    public function checkForPermission(User $user, Request $request)
+    {
+        $permission = json_decode($user->role->permission);
+        $hasPermission = false;
+        if (!$permission) {
+            return view('welcome');
+        }
+        foreach ($permission as $p) {
+            if ($p->name == $request->path()) {
+                if ($p->read) {
+                    $hasPermission = true;
+                }
+            }
+        }
+        if ($hasPermission) {
+            return view('welcome');
+        }
+        return view('404');
     }
 
     public function listTag()

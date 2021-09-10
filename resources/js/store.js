@@ -12,14 +12,18 @@ export default new Vuex.Store({
             deletingIndex: -1,
             isDeleted : false,
         },
-        user: false
+        user: false,
+        permissions: null
     },
     getters: {
         getDeleteModalObj(state){
             return state.deleteModalObj
         },
-        getLoggedUser(state){
+        getUser(state){
             return state.user
+        },
+        getUserPermission(state){
+            return state.permissions
         },
     },
     mutations: {
@@ -37,6 +41,9 @@ export default new Vuex.Store({
         },
         updateUser(state, data){
             state.user = data
+        },
+        updateUserPermission(state, data){
+            state.permissions = data
         },
     },
     actions: {

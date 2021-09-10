@@ -86,6 +86,7 @@ export default {
                 this.success('Role has been assigned successfully!')
                 let index = this.roles.findIndex(role => role.id === this.data.id)
                 this.roles[index].permission = data
+                // setTimeout(() => this.$router.go(), 400);
             }else{
                 this.swr()
             }

@@ -13,13 +13,9 @@
                     </div>
                     <div class="_1side_menu_list">
                         <ul class="_1side_menu_list_ul">
-                            <li><router-link to="/"><Icon type="ios-speedometer" /> Home</router-link></li>
-                            <li><router-link to="/tags"><Icon type="md-barcode" /> Tags</router-link></li>
-<!--                            <li><router-link to="/categories"><Icon type="md-barcode" /> Category</router-link></li>-->
-                            <li><router-link to="adminusers"><Icon type="md-barcode" /> Admin Users</router-link></li>
-                            <li><router-link to="role"><Icon type="md-barcode" /> Roles</router-link></li>
-                            <li><router-link to="permission"><Icon type="md-barcode" /> Permission</router-link></li>
-                            <li><router-link to="logout"><Icon type="md-barcode" /> Logout</router-link></li>
+                            <li v-for="(menuItem, i) in permission" :key="i" v-if="permission.length && menuItem.read">
+                                <router-link :to="menuItem.name"><Icon type="ios-speedometer" /> {{menuItem.resourceName}}</router-link>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -44,7 +40,7 @@
 <script>
 export default {
     name: "mainapp",
-    props: ['user'],
+    props: ['user', 'permission'],
     data(){
         return {
 
@@ -52,7 +48,7 @@ export default {
     },
     created(){
         this.$store.commit('updateUser', this.user)
-        console.log(this.user)
+        this.$store.commit('updateUserPermission', this.permission)
     }
 }
 </script>

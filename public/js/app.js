@@ -3111,7 +3111,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   index = _this2.roles.findIndex(function (role) {
                     return role.id === _this2.data.id;
                   });
-                  _this2.roles[index].permission = data;
+                  _this2.roles[index].permission = data; // setTimeout(() => this.$router.go(), 400);
                 } else {
                   _this2.swr();
                 }
@@ -3682,10 +3682,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              _context4.next = 2;
+              console.log(_this4.isUpdatePermitted);
+              _context4.next = 3;
               return _this4.callApi('get', 'api/app/get_tag');
 
-            case 2:
+            case 3:
               res = _context4.sent;
 
               if (res.status === 200) {
@@ -3695,7 +3696,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this4.swr();
               }
 
-            case 4:
+            case 5:
             case "end":
               return _context4.stop();
           }
@@ -3765,19 +3766,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "mainapp",
-  props: ['user'],
+  props: ['user', 'permission'],
   data: function data() {
     return {};
   },
   created: function created() {
     this.$store.commit('updateUser', this.user);
-    console.log(this.user);
+    this.$store.commit('updateUserPermission', this.permission);
   }
 });
 
@@ -3816,11 +3813,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -3892,8 +3903,52 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         title: title,
         desc: desc
       });
+    },
+    checkUserPermission: function checkUserPermission(key) {
+      if (!this.permissions) return true;
+      var isPermitted = false;
+
+      var _iterator = _createForOfIteratorHelper(this.permissions),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var d = _step.value;
+
+          if (this.$route.name == d.name) {
+            if (d[key]) {
+              isPermitted = true;
+              break;
+            } else {
+              break;
+            }
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      return isPermitted;
     }
-  }
+  },
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)({
+    'permissions': 'getUserPermission'
+  })), {}, {
+    isReadPermitted: function isReadPermitted() {
+      return this.checkUserPermission('read');
+    },
+    isWritePermitted: function isWritePermitted() {
+      return this.checkUserPermission('write');
+    },
+    isUpdatePermitted: function isUpdatePermitted() {
+      return this.checkUserPermission('update');
+    },
+    isDeletePermitted: function isDeletePermitted() {
+      return this.checkUserPermission('delete');
+    }
+  })
 });
 
 /***/ }),
@@ -3989,14 +4044,18 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
       deletingIndex: -1,
       isDeleted: false
     },
-    user: false
+    user: false,
+    permissions: null
   },
   getters: {
     getDeleteModalObj: function getDeleteModalObj(state) {
       return state.deleteModalObj;
     },
-    getLoggedUser: function getLoggedUser(state) {
+    getUser: function getUser(state) {
       return state.user;
+    },
+    getUserPermission: function getUserPermission(state) {
+      return state.permissions;
     }
   },
   mutations: {
@@ -4014,6 +4073,9 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
     },
     updateUser: function updateUser(state, data) {
       state.user = data;
+    },
+    updateUserPermission: function updateUserPermission(state, data) {
+      state.permissions = data;
     }
   },
   actions: {}
@@ -8518,7 +8580,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n._1adminOverveiw_table_recent[data-v-172b28a4]{\n    margin: 0 auto;\n    margin-top: 220px;\n}\n.login_footer[data-v-172b28a4]{\n    margin: 0 auto;\n    text-align: center;\n}\n.login_header[data-v-172b28a4]{\n    text-align: center;\n    margin-bottom: 25px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n._1adminOverveiw_table_recent[data-v-172b28a4]{\r\n    margin: 0 auto;\r\n    margin-top: 220px;\n}\n.login_footer[data-v-172b28a4]{\r\n    margin: 0 auto;\r\n    text-align: center;\n}\n.login_header[data-v-172b28a4]{\r\n    text-align: center;\r\n    margin-bottom: 25px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8542,7 +8604,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.demo-spin-container[data-v-3417dad6]{\n    display: inline-block;\n    width: 100%;\n    height: 100px;\n    position: relative;\n    border: 1px solid #eee;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.demo-spin-container[data-v-3417dad6]{\r\n    display: inline-block;\r\n    width: 100%;\r\n    height: 100px;\r\n    position: relative;\r\n    border: 1px solid #eee;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -88991,21 +89053,23 @@ var render = function() {
               { staticClass: "_title0" },
               [
                 _vm._v("Tags "),
-                _c(
-                  "Button",
-                  {
-                    on: {
-                      click: function($event) {
-                        _vm.addModal = true
-                      }
-                    }
-                  },
-                  [
-                    _c("Icon", { attrs: { type: "md-add" } }),
-                    _vm._v(" Add Tag")
-                  ],
-                  1
-                )
+                this.isWritePermitted
+                  ? _c(
+                      "Button",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.addModal = true
+                          }
+                        }
+                      },
+                      [
+                        _c("Icon", { attrs: { type: "md-add" } }),
+                        _vm._v(" Add Tag")
+                      ],
+                      1
+                    )
+                  : _vm._e()
               ],
               1
             ),
@@ -89031,35 +89095,39 @@ var render = function() {
                           _c(
                             "td",
                             [
-                              _c(
-                                "Button",
-                                {
-                                  attrs: { type: "info", size: "small" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.showEditModal(tag, i)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Edit")]
-                              ),
+                              _vm.isUpdatePermitted
+                                ? _c(
+                                    "Button",
+                                    {
+                                      attrs: { type: "info", size: "small" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.showEditModal(tag, i)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Edit")]
+                                  )
+                                : _vm._e(),
                               _vm._v(" "),
-                              _c(
-                                "Button",
-                                {
-                                  attrs: {
-                                    type: "error",
-                                    size: "small",
-                                    loading: tag.isDeleting
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.showDeleteModal(tag, i)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Delete")]
-                              )
+                              _vm.isDeletePermitted
+                                ? _c(
+                                    "Button",
+                                    {
+                                      attrs: {
+                                        type: "error",
+                                        size: "small",
+                                        loading: tag.isDeleting
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.showDeleteModal(tag, i)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Delete")]
+                                  )
+                                : _vm._e()
                             ],
                             1
                           )
@@ -89257,103 +89325,33 @@ var render = function() {
                 _vm._m(1),
                 _vm._v(" "),
                 _c("div", { staticClass: "_1side_menu_list" }, [
-                  _c("ul", { staticClass: "_1side_menu_list_ul" }, [
-                    _c(
-                      "li",
-                      [
-                        _c(
-                          "router-link",
-                          { attrs: { to: "/" } },
-                          [
-                            _c("Icon", { attrs: { type: "ios-speedometer" } }),
-                            _vm._v(" Home")
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c(
-                          "router-link",
-                          { attrs: { to: "/tags" } },
-                          [
-                            _c("Icon", { attrs: { type: "md-barcode" } }),
-                            _vm._v(" Tags")
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c(
-                          "router-link",
-                          { attrs: { to: "adminusers" } },
-                          [
-                            _c("Icon", { attrs: { type: "md-barcode" } }),
-                            _vm._v(" Admin Users")
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c(
-                          "router-link",
-                          { attrs: { to: "role" } },
-                          [
-                            _c("Icon", { attrs: { type: "md-barcode" } }),
-                            _vm._v(" Roles")
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c(
-                          "router-link",
-                          { attrs: { to: "permission" } },
-                          [
-                            _c("Icon", { attrs: { type: "md-barcode" } }),
-                            _vm._v(" Permission")
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c(
-                          "router-link",
-                          { attrs: { to: "logout" } },
-                          [
-                            _c("Icon", { attrs: { type: "md-barcode" } }),
-                            _vm._v(" Logout")
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ])
+                  _c(
+                    "ul",
+                    { staticClass: "_1side_menu_list_ul" },
+                    _vm._l(_vm.permission, function(menuItem, i) {
+                      return _vm.permission.length && menuItem.read
+                        ? _c(
+                            "li",
+                            { key: i },
+                            [
+                              _c(
+                                "router-link",
+                                { attrs: { to: menuItem.name } },
+                                [
+                                  _c("Icon", {
+                                    attrs: { type: "ios-speedometer" }
+                                  }),
+                                  _vm._v(" " + _vm._s(menuItem.resourceName))
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        : _vm._e()
+                    }),
+                    0
+                  )
                 ])
               ])
             ]),
@@ -105990,7 +105988,7 @@ var index = {
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"_from":"axios@^0.21.4","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.21.4","name":"axios","escapedName":"axios","rawSpec":"^0.21.4","saveSpec":null,"fetchSpec":"^0.21.4"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_shasum":"c67b90dc0568e5c1cf2b0b858c43ba28e2eda575","_spec":"axios@^0.21.4","_where":"C:\\\\Users\\\\usuario\\\\Desktop\\\\Development\\\\Proyectos\\\\Laravel\\\\VueUI","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
+module.exports = JSON.parse('{"_args":[["axios@0.21.4","D:\\\\Proyectos\\\\Laravel\\\\VueUI"]],"_development":true,"_from":"axios@0.21.4","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.21.4","name":"axios","escapedName":"axios","rawSpec":"0.21.4","saveSpec":null,"fetchSpec":"0.21.4"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_spec":"0.21.4","_where":"D:\\\\Proyectos\\\\Laravel\\\\VueUI","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
 
 /***/ })
 
