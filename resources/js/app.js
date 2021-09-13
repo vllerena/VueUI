@@ -4,10 +4,11 @@ window.Vue = require('vue')
 import router from "./router";
 import store from "./store";
 import ViewUI from 'view-design';
-import 'view-design/dist/styles/iview.css';
+// import 'view-design/dist/styles/iview.css';
 Vue.use(ViewUI);
 import common from "./common";
 Vue.mixin(common)
+
 Vue.component('mainapp', require('./mainapp').default);
 
 const app = new Vue({

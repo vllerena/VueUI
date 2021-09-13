@@ -1,183 +1,99 @@
 <template>
     <div>
-        <div class="container-fluid p-0">
-            <h1 class="h3 mb-3"><strong>Analytics</strong> Dashboard</h1>
-            <div class="row">
-                <div class="col-xl-6 col-xxl-5 d-flex">
-                    <div class="w-100">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col mt-0">
-                                                <h5 class="card-title">Sales</h5>
-                                            </div>
-                                            <div class="col-auto">
-                                                <div class="stat text-primary">
-                                                    <i class="align-middle" data-feather="truck"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h1 class="mt-1 mb-3">2.382</h1>
-                                        <div class="mb-0">
-                                            <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
-                                            <span class="text-muted">Since last week</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col mt-0">
-                                                <h5 class="card-title">Visitors</h5>
-                                            </div>
-
-                                            <div class="col-auto">
-                                                <div class="stat text-primary">
-                                                    <i class="align-middle" data-feather="users"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h1 class="mt-1 mb-3">14.212</h1>
-                                        <div class="mb-0">
-                                            <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
-                                            <span class="text-muted">Since last week</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col mt-0">
-                                                <h5 class="card-title">Earnings</h5>
-                                            </div>
-
-                                            <div class="col-auto">
-                                                <div class="stat text-primary">
-                                                    <i class="align-middle" data-feather="dollar-sign"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h1 class="mt-1 mb-3">$21.300</h1>
-                                        <div class="mb-0">
-                                            <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
-                                            <span class="text-muted">Since last week</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col mt-0">
-                                                <h5 class="card-title">Orders</h5>
-                                            </div>
-
-                                            <div class="col-auto">
-                                                <div class="stat text-primary">
-                                                    <i class="align-middle" data-feather="shopping-cart"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h1 class="mt-1 mb-3">64</h1>
-                                        <div class="mb-0">
-                                            <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25% </span>
-                                            <span class="text-muted">Since last week</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+        <section id="dashboard-ecommerce">
+            <div class="row match-height">
+                <div class="col-xl-4 col-md-6 col-12">
+                    <div class="card card-congratulation-medal">
+                        <div class="card-body">
+                            <h5>Congratulations 🎉 John!</h5>
+                            <p class="card-text font-small-3">You have won gold medal</p>
+                            <h3 class="mb-75 mt-2 pt-50">
+                                <a href="#">$48.9k</a>
+                            </h3>
+                            <button type="button" class="btn btn-primary">View Sales</button>
+                            <img src="https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/demo-1/img/badge.0fa134b5.svg" class="congratulation-medal" alt="Medal Pic" />
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-lg-8 col-xxl-9 d-flex">
-                    <div class="card flex-fill">
+                <div class="col-xl-8 col-md-6 col-12">
+                    <div class="card card-statistics">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">Latest Projects</h5>
+                            <h4 class="card-title">Statistics</h4>
+                            <div class="d-flex align-items-center">
+                                <p class="card-text font-small-2 me-25 mb-0">Updated 1 month ago</p>
+                                <airplay-icon size="1.5x" class="custom-class"></airplay-icon>
+                            </div>
                         </div>
-                        <table class="table table-hover my-0">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th class="d-none d-xl-table-cell">Start Date</th>
-                                <th class="d-none d-xl-table-cell">End Date</th>
-                                <th>Status</th>
-                                <th class="d-none d-md-table-cell">Assignee</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>Project Apollo</td>
-                                <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                <td><span class="badge bg-success">Done</span></td>
-                                <td class="d-none d-md-table-cell">Vanessa Tucker</td>
-                            </tr>
-                            <tr>
-                                <td>Project Fireball</td>
-                                <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                <td><span class="badge bg-danger">Cancelled</span></td>
-                                <td class="d-none d-md-table-cell">William Harris</td>
-                            </tr>
-                            <tr>
-                                <td>Project Hades</td>
-                                <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                <td><span class="badge bg-success">Done</span></td>
-                                <td class="d-none d-md-table-cell">Sharon Lessman</td>
-                            </tr>
-                            <tr>
-                                <td>Project Nitro</td>
-                                <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                <td><span class="badge bg-warning">In progress</span></td>
-                                <td class="d-none d-md-table-cell">Vanessa Tucker</td>
-                            </tr>
-                            <tr>
-                                <td>Project Phoenix</td>
-                                <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                <td><span class="badge bg-success">Done</span></td>
-                                <td class="d-none d-md-table-cell">William Harris</td>
-                            </tr>
-                            <tr>
-                                <td>Project X</td>
-                                <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                <td><span class="badge bg-success">Done</span></td>
-                                <td class="d-none d-md-table-cell">Sharon Lessman</td>
-                            </tr>
-                            <tr>
-                                <td>Project Romeo</td>
-                                <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                <td><span class="badge bg-success">Done</span></td>
-                                <td class="d-none d-md-table-cell">Christina Mason</td>
-                            </tr>
-                            <tr>
-                                <td>Project Wombat</td>
-                                <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                <td><span class="badge bg-warning">In progress</span></td>
-                                <td class="d-none d-md-table-cell">William Harris</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="card-body statistics-body">
+                            <div class="row">
+                                <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-xl-0">
+                                    <div class="d-flex flex-row">
+                                        <div class="avatar bg-light-primary me-2">
+                                            <div class="avatar-content">
+                                                <i data-feather="trending-up" class="avatar-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="my-auto">
+                                            <h4 class="fw-bolder mb-0">230k</h4>
+                                            <p class="card-text font-small-3 mb-0">Sales</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-xl-0">
+                                    <div class="d-flex flex-row">
+                                        <div class="avatar bg-light-info me-2">
+                                            <div class="avatar-content">
+                                                <i data-feather="user" class="avatar-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="my-auto">
+                                            <h4 class="fw-bolder mb-0">8.549k</h4>
+                                            <p class="card-text font-small-3 mb-0">Customers</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-sm-0">
+                                    <div class="d-flex flex-row">
+                                        <div class="avatar bg-light-danger me-2">
+                                            <div class="avatar-content">
+                                                <i data-feather="box" class="avatar-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="my-auto">
+                                            <h4 class="fw-bolder mb-0">1.423k</h4>
+                                            <p class="card-text font-small-3 mb-0">Products</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-sm-6 col-12">
+                                    <div class="d-flex flex-row">
+                                        <div class="avatar bg-light-success me-2">
+                                            <div class="avatar-content">
+                                                <i data-feather="dollar-sign" class="avatar-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="my-auto">
+                                            <h4 class="fw-bolder mb-0">$9745</h4>
+                                            <p class="card-text font-small-3 mb-0">Revenue</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 </template>
 
 <script>
+import { AirplayIcon } from 'vue-feather-icons'
 export default {
-    name: "home"
+    name: "home",
+    components: {
+        AirplayIcon
+    }
 }
 </script>
 

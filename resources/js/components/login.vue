@@ -1,50 +1,35 @@
 <template>
     <div>
-        <main class="d-flex w-100 bg-light">
-            <div class="container d-flex flex-column">
-                <div class="row vh-100">
-                    <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
-                        <div class="d-table-cell align-middle">
-                            <div class="text-center my-4">
-                                <h1 class="h2">Bienvenido(a)</h1>
-                                <p class="lead">
-                                    Por favor ingresa tus datos para iniciar el sistema.
-                                </p>
-                            </div>
-                            <div class="card">
+        <div class="auth-wrapper auth-v1 px-2">
+                        <div class="auth-inner py-2">
+                            <div class="card mb-0">
                                 <div class="card-body">
-                                    <div class="m-sm-4">
-                                            <div class="mb-3">
-                                                <label class="form-label">Email</label>
-                                                <input class="form-control form-control-lg" type="email" v-model="data.email" placeholder="Enter your email" />
-                                            </div>
-                                            <div class="mb-3">
+                                    <a href="#" class="brand-logo">
+                                        <h2 class="brand-text text-primary ms-1">Vuexy</h2>
+                                    </a>
+                                    <h4 class="card-title mb-1">Welcome to Vuexy! 👋</h4>
+                                    <p class="card-text mb-2">Please sign-in to your account and start the adventure</p>
+                                        <div class="mb-1">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" class="form-control" v-model="data.email" placeholder="Enter your email" aria-describedby="login-email" tabindex="1" autofocus/>
+                                        </div>
+                                        <div class="mb-1">
+                                            <div class="d-flex justify-content-between">
                                                 <label class="form-label">Password</label>
-                                                <input class="form-control form-control-lg" type="password" v-model="data.password" placeholder="Enter your password" />
+                                                <a href="page-auth-forgot-password-v1.html">
+                                                    <small>Forgot Password?</small>
+                                                </a>
                                             </div>
-                                            <div class="text-center mt-3">
-                                                <button type="primary" @click="login" :disabled="isLogging" :loading="isLogging" class="btn btn-lg btn-primary">{{isLogging ? 'Loging...' : 'Login'}}</button>
+                                            <div class="input-group input-group-merge form-password-toggle">
+                                                <input type="password" class="form-control form-control-merge" v-model="data.password" tabindex="2" placeholder="Enter your password" aria-describedby="login-password" />
+                                                <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                                             </div>
-                                    </div>
+                                        </div>
+                                        <button class="btn btn-primary w-100" tabindex="4" @click="login" :disabled="isLogging" :loading="isLogging">{{isLogging ? 'Loging...' : 'Login'}}</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
             </div>
-        </main>
-<!--        <div class="container">-->
-<!--            <div class="_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20 col-md-4">-->
-<!--                <div class="login_header">-->
-<!--                    <h1>Login Page</h1>-->
-<!--                </div>-->
-<!--                <Input type="email" v-model="data.email" class="mb-3" placeholder="Email" />-->
-<!--                <Input type="password" v-model="data.password" class="mb-3" placeholder="Password" />-->
-<!--                <div class="login_footer">-->
-<!--                    <Button type="primary" @click="login" :disabled="isLogging" :loading="isLogging">{{isLogging ? 'Loging...' : 'Login'}}</Button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
     </div>
 </template>
 
@@ -83,22 +68,149 @@ export default {
             }
             this.isLogging = false
         }
+    },
+    mounted () {
+        document.body.classList.add('blank-page')
+    },
+    destroyed () {
+        document.body.classList.remove('blank-page')
     }
 }
 </script>
 
 <style scoped>
-._1adminOverveiw_table_recent{
-    margin: 0 auto;
-    margin-top: 220px;
-}
-.login_footer{
-    margin: 0 auto;
-    text-align: center;
-}
-.login_header{
-    text-align: center;
-    margin-bottom: 25px;
-}
+    form span.error {
+        width: 100%;
+        font-size: 0.857rem; }
+
+    form .error:not(input) {
+        color: #ea5455; }
+
+    form input.error,
+    form input.error:focus {
+        border-color: #ea5455 !important; }
+
+    form textarea.error {
+        border-color: #ea5455 !important; }
+
+    form .select2.error + .select2-container--classic .select2-selection--single,
+    form .select2.error + .select2-container--default .select2-selection--single,
+    form .select2.error + .select2-container--classic .select2-selection--multiple,
+    form .select2.error + .select2-container--default .select2-selection--multiple {
+        border-color: #ea5455 !important; }
+
+    .was-validated .form-select:invalid:not([multiple]):not([size]),
+    .was-validated .form-select:invalid:not([multiple])[size='1'],
+    .form-select.is-invalid:not([multiple]):not([size]),
+    .form-select.is-invalid:not([multiple])[size='1'] {
+        background-position: right 1rem center, center right 2.5rem; }
+    .auth-wrapper {
+        display: flex;
+        flex-basis: 100%;
+        min-height: 100vh;
+        min-height: calc(var(--vh, 1vh) * 100);
+        width: 100%; }
+
+    .auth-wrapper .auth-inner {
+        width: 100%; }
+
+    .auth-wrapper.auth-v1 {
+        align-items: center;
+        justify-content: center;
+        overflow: hidden; }
+
+    .auth-wrapper.auth-v1 .auth-inner {
+        position: relative; }
+
+    .auth-wrapper.auth-v1 .auth-inner:before {
+        width: 244px;
+        height: 243px;
+        content: ' ';
+        position: absolute;
+        top: -54px;
+        left: -46px;
+        background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPQAAADzCAMAAACG9Mt0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAA9KADAAQAAAABAAAA8wAAAADhQHfUAAAAyVBMVEUAAAD///+AgP+AgP9mZv+AgNWAgP9tbf9gYP+AgP9xcf9mZv+AZuaAgP9dXf90dOhiYv92dv9mZu5mZv93d+53d/9paf94afCAcfFrXvJra/9mZvJzZvJzc/JoaP96b/Rqav91aupsYvV2bOt2bPVxaPZ7cfZqavZyau1waPd4aO9xafBxafh4afB1bfh4avFuZ/F2afJzZvJzZ/N0aPN0bvN3bPR0ae5yZ/R3be93bfR1au9zafBxbPVzavV0a/F0a/ZyafFwaPKZm3nTAAAAQ3RSTlMAAQIEBQYGBwgICQoKCgsLDQ0PDw8PERESExMUFBQWFxgYGhoaGxsdHSAgIiIiIyQlJygqLCwtLi8vLzAzNDU3Nzg7h9vbHgAAA9RJREFUeNrt3ftS2kAUx/Fc1gSyWsErtuJdRDQiiteolb7/QzUoTm07k4AzObuu3/MCez45yWbzT36eZ6b8erO1e1B97baadd+zocJWmg0HaXe/+uqmg2GWtkLT5Lle1m9LdhG2+1lvzuiUO1knEF81yFc1N+35m15kZOGodz1vyLx+v2Lseq/erxtZd/NuweCTtfiwaWLOD5FnsqI7+VnP3y8afnEs3Es/1+H1qvETwuq18B7e6VlwLup1ZM8kWWQBOsrmHL7GVtxvYRZYgQ4ywae61ffsqH5Lbq20bQm6ncp9P2ehJegwE/u+rl95ttSwLrVSc2ANetAU28dSa9Cp2E623bUG3d2VWmn/wBq0XCugQYMGLdVKoOJaoiuok1NdXSW1WAUfRPtRUllflaJf5ZE/O9pXVbZUPTov5c+IDqvtRwStdTgLutoxy6GnGfYb2o+1I2gd+1OiqzfLocvVE7TSDqG1mgodaqfQZbvZC9rXjqG1X45WzqFVKVpk0LLo4lGP0ZGD6KgMnTiITkrQgXYQrYNitHISrYrRsZPouBhdcxJdK0YnTqKTYrR2Eq1BgwYNGjRo0KBBgwYNGjRo0KBBgwYNGjRo0KBBgwYNGjRo0KBBgwYNGjRo0KBBgwYNGjRo0KBBgwYNGjRo0KBBgwYNGjRo0KBBgwYNGjRoh9DH59ag86ACoSYOL61B55EUQk1s3VqDzsNHhJpYe7QGncfMSHUxaliCHgcKSXVxeWQJehwdJdXF4dAS9DgkTKqLxuibFeiXODixNi7OrEC/BP+JtbE0WrYA/RrxKNfH2YUF6NegSbk+Gk87xtErN6EsWm88fzeMXpwE9EruLns/l42io4dJFLPo2/Po1w+D6IW7t9Bt2SPx3vOOMfS7eHVZtN54ulg2go56138Ct4XRunE2Ovsmjg46WeddUoUWr6WL0fCoIYgO2/2s91fstDZQjcPL0ePt5flpdXUwqW46uMrS1j95JNpQrW0dHp9UV/uT2m416/8HVGg3qzhpBjRo0KBBgwYNGjRo0KBBgwYNGjRo0KBBgwYNGjRo0KBBgwYNGjRo0KBBgwYNGjRo0KBBgwYNGjRo0KBBgwYNGjRo0KBBgwYNGjRo0KBBgwYNGjRo0KC/FDpx0pwUo2tOomvF6NhJdFyMVk6iVTE6cBIdeF9vJyvZx/I/AzuIjsrQvoNovwzt4FamSs0Ojrp80PmvoB0zh940pb7azf1yg7t0LIt978uppzbnalfucDW92ZndLPRmKweGPduYJ+zoM5/Dk+gD5NdvLhXXPp88qcUqmEH5G5JZRs6cuxwIAAAAAElFTkSuQmCC"); }
+
+    @media (max-width: 575.98px) {
+        .auth-wrapper.auth-v1 .auth-inner:before {
+            display: none; } }
+
+    .auth-wrapper.auth-v1 .auth-inner:after {
+        width: 272px;
+        height: 272px;
+        content: ' ';
+        position: absolute;
+        bottom: -55px;
+        right: -75px;
+        background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARAAAAEQCAMAAABP1NsnAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAABEKADAAQAAAABAAABEAAAAAAQWxS2AAAAwFBMVEUAAAD///+AgICAgP9VVaqqVf+qqv+AgL+AgP9mZsxmZv+ZZv+AgNWAgP9tbdttbf+Sbf+AYN+AgN+AgP9xceNmZv+AZuaAZv90dOh0dP9qav+AauqAav+AgP92dv9tbf+Abe2Abf93Zu53d+6AcO94afCAcfF5a+R5a/JzZuaAZvKAc/J5bed5bfOAaPN6b/R1auqAavR6ZvV6cPV2bOuAbPV7aPZ2be2AbfZ7au17avZ3Zu53b+57a+97a/d4aO9J6CoeAAAAQHRSTlMAAQICAwMDBAQFBQUGBgcHBwgICAkKCgoLCwwMDAwNDg4ODw8QERITExQUFBUVFhcYGBkZGhobHBwdHR4eHx8gJ5uMWwAAA/FJREFUeNrt2G1XEkEYxvHZNk2xHGzdbKFl0cTwgdSkCKzu7/+t4pw6sAjtjIueE/f8r3fMO35nZnbuy5gVGcvfzJe0rnTfGI+MggGJRUZnbpPIhJKt88nU53JnFULvyISY6KAv8vPj0vr2rYwiE2Z2B9J+uNYcyyQxwWZvaeGH3G4bMjsvI/kcwTC/V+7kLoahlITzQojP3ZFgsJCh7IJQzpX0QFj4uMiY18eDMZ9bZCF9OQahnK6cm/Y7js0sh/LF3Auv1PlQd3MxbdXYIQspV44EEEAAAWTNDAYYkKdJbNMsLzYueZbaZ2iM46RVbHBaiZ9Js+nHEdli42N9XuSen5hGp1CQTuOJQDRsD99N4gMSpYWapNH6IJo83CIeILZQFesEaber79NCWRoukOpNEnW0gXQqD81w6ACxhbrYde7VuFCYeA2QRCNIsgZISyNIqz6IyhPjOjNVIFYniK3dmKU6QdLaJUimEySrDZLrBMlrgxRKU7sxCw/EMe0CAggggADySJCqxixIkKpNEh6IozELD8RxjQACCCCAAPJIkKrGLEgQXqqAAEJjxrQLCCCAAEJjRmNGY8a0CwgggABCYwYIfQgggNCYMe0CAggggNCY0ZjRmDHtAgIIIIAAQmNGHwIIIDRmTLuAAAIIIDRmNGY0Zky7gAACCCCA0JjRhwACCI0Z0y4ggAACCI0ZjRmNGdMuIIAAAgggNGb0IYAAQmPGtAsIIIAAQmNGY0ZjxrQLCCCAAAIIjRl9CCCA0Jgx7QICCCCA0JjRmNGYMe0CAggggABCY0YfAgggNGZMu4AAAgggNGY0ZjRmTLuAAAIIIIDQmNGHAAIIjRnTLiCAAAIIjRmNGY0ZIEy7gAACCCA0ZvQhgABCY8a0CwgggABCY0ZjBgiNGdMuIIAAAgiN2f/Sh+Q6PfLaIJlOkKw2SKoTJK3dmFmdILb2tBvrBIlrg5iWRo+WqQ+SaARJ1gCJAzsxThCN16p1vNurGjNjoo42j07kAHFskoY2kEbl33U0ZgoPjXW+Rl0gkarnahqtDaJKxMPDDWIiNafGenh4gExvVhXfmk7Da6L1AVGxSby2h6MxK79Zk42ea1pJbJ48sU2zDezQ8iy1z6BBwoyjMQsvXp8YQAAhgADilRfyy+wf8WqZZUfGZihvgZiB3FybC+kCUU5XLkAo50C+gbBQdUzkAIVyejIAYfFTI1solHP2HgNCnHn5AYNy4jvpoVB6fVzL91cwzLJ9Lfd7S0jhehxO5H5/yePr1W6gHonI7fJ5ORSR/n6Q2yQanq763zuXU5LJZRKiyD/W9/pjkdPZz0/yJ8fqVyry+qQZDMjJKoDfy8bRVhHhQTwAAAAASUVORK5CYII=");
+        z-index: -1; }
+
+    @media (max-width: 575.98px) {
+        .auth-wrapper.auth-v1 .auth-inner:after {
+            display: none; } }
+
+    .auth-wrapper.auth-v2 {
+        align-items: flex-start; }
+
+    .auth-wrapper.auth-v2 .auth-inner {
+        height: 100vh;
+        overflow-y: auto;
+        height: calc(var(--vh, 1vh) * 100); }
+
+    .auth-wrapper.auth-v2 .brand-logo {
+        position: absolute;
+        top: 2rem;
+        left: 2rem;
+        margin: 0;
+        z-index: 1;
+        justify-content: unset; }
+
+    .auth-wrapper.auth-v1 .auth-inner {
+        max-width: 400px; }
+
+    .auth-wrapper .brand-logo {
+        display: flex;
+        justify-content: center;
+        margin: 1rem 0 2rem 0; }
+
+    .auth-wrapper .brand-logo .brand-text {
+        font-weight: 600; }
+
+    .auth-wrapper .auth-footer-btn .btn {
+        padding: 0.6rem !important; }
+
+    .auth-wrapper .auth-footer-btn .btn:not(:last-child) {
+        margin-right: 1rem; }
+
+    .auth-wrapper .auth-footer-btn .btn:focus {
+        box-shadow: none; }
+
+    @media (min-width: 1200px) {
+        .auth-wrapper.auth-v2 .auth-card {
+            width: 400px; } }
+
+    @media (max-width: 575.98px) {
+        .auth-wrapper.auth-v2 .brand-logo {
+            left: 1.5rem;
+            padding-left: 0; } }
+
+    .auth-wrapper .auth-bg {
+        background-color: #fff; }
+
+    .dark-layout .auth-wrapper .auth-bg {
+        background-color: #283046; }
+
+    @media (max-height: 625px) {
+        .dark-layout .auth-wrapper .auth-inner {
+            background-color: #283046; }
+        .auth-wrapper .auth-bg {
+            padding-top: 3rem; }
+        .auth-wrapper .auth-inner {
+            background-color: #fff;
+            padding-bottom: 1rem; }
+        .auth-wrapper.auth-v2 .brand-logo {
+            position: relative;
+            left: 0;
+            padding-left: 1.5rem; } }
 </style>
 
