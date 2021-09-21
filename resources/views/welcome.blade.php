@@ -29,7 +29,7 @@
 <body class="vertical-layout vertical-menu-modern navbar-floating footer-static" data-open="click" data-menu="vertical-menu-modern" data-col="">
     <div id="app">
         @if(Auth::check())
-            <mainapp :user="{{Auth::user()}}" :permission="{{Auth::user()->role->permission}}"></mainapp>
+            <mainapp :user="{{Auth::user()}}" :permission="{{(Auth::user()->role->permission) ? Auth::user()->role->permission : 'vacio'}}"></mainapp>
         @else
             <mainapp :user="false"></mainapp>
         @endif

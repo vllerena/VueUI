@@ -1,5 +1,5 @@
 import { mapGetters } from 'vuex'
-
+const axios = require('axios');
 export default {
     data(){
         return {

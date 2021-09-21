@@ -28,7 +28,14 @@ class CreateSuperuser extends Command
 
         $role = Role::create([
             RoleAttr::ROLE_NAME => 'Master',
-            RoleAttr::IS_ADMIN => true
+            RoleAttr::IS_ADMIN => true,
+            RoleAttr::PERMISSION => '[
+                {"resourceName":"Home","read":true,"write":true,"update":true,"delete":true,"name":"/"},
+                {"resourceName":"Tags","read":true,"write":true,"update":true,"delete":true,"name":"tags"},
+                {"resourceName":"Admin users","read":true,"write":true,"update":true,"delete":true,"name":"adminusers"},
+                {"resourceName":"Role","read":true,"write":true,"update":true,"delete":true,"name":"role"},
+                {"resourceName":"Permission","read":true,"write":true,"update":true,"delete":true,"name":"permission"}
+            ]'
         ]);
 
         $user = User::updateOrCreate(

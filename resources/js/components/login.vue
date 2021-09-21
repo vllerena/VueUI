@@ -1,35 +1,35 @@
 <template>
     <div>
         <div class="auth-wrapper auth-v1 px-2">
-                        <div class="auth-inner py-2">
-                            <div class="card mb-0">
-                                <div class="card-body">
-                                    <a href="#" class="brand-logo">
-                                        <h2 class="brand-text text-primary ms-1">Vuexy</h2>
+            <div class="auth-inner py-2">
+                <div class="card mb-0">
+                    <div class="card-body">
+                        <a href="#" class="brand-logo">
+                            <h2 class="brand-text text-primary ms-1">Vuexy</h2>
+                        </a>
+                        <h4 class="card-title mb-1">Welcome to Vuexy! 👋</h4>
+                        <p class="card-text mb-2">Please sign-in to your account and start the adventure</p>
+                            <div class="mb-1">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" v-model="data.email" placeholder="Enter your email" aria-describedby="login-email" tabindex="1" autofocus/>
+                            </div>
+                            <div class="mb-1">
+                                <div class="d-flex justify-content-between">
+                                    <label class="form-label">Password</label>
+                                    <a href="page-auth-forgot-password-v1.html">
+                                        <small>Forgot Password?</small>
                                     </a>
-                                    <h4 class="card-title mb-1">Welcome to Vuexy! 👋</h4>
-                                    <p class="card-text mb-2">Please sign-in to your account and start the adventure</p>
-                                        <div class="mb-1">
-                                            <label class="form-label">Email</label>
-                                            <input type="email" class="form-control" v-model="data.email" placeholder="Enter your email" aria-describedby="login-email" tabindex="1" autofocus/>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="d-flex justify-content-between">
-                                                <label class="form-label">Password</label>
-                                                <a href="page-auth-forgot-password-v1.html">
-                                                    <small>Forgot Password?</small>
-                                                </a>
-                                            </div>
-                                            <div class="input-group input-group-merge form-password-toggle">
-                                                <input type="password" class="form-control form-control-merge" v-model="data.password" tabindex="2" placeholder="Enter your password" aria-describedby="login-password" />
-                                                <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
-                                            </div>
-                                        </div>
-                                        <button class="btn btn-primary w-100" tabindex="4" @click="login" :disabled="isLogging" :loading="isLogging">{{isLogging ? 'Loging...' : 'Login'}}</button>
+                                </div>
+                                <div class="input-group input-group-merge form-password-toggle">
+                                    <input type="password" class="form-control form-control-merge" v-model="data.password" tabindex="2" placeholder="Enter your password" aria-describedby="login-password" />
+                                    <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                                 </div>
                             </div>
-                        </div>
+                            <button class="btn btn-primary w-100" tabindex="4" @click="login" :disabled="isLogging" :loading="isLogging">{{isLogging ? 'Loging...' : 'Login'}}</button>
+                    </div>
+                </div>
             </div>
+        </div>
     </div>
 </template>
 
